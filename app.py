@@ -319,7 +319,11 @@ elif st.session_state.view == "details":
     with left:
         st.markdown("<div class='card'>", unsafe_allow_html=True)
         if data.get("poster_url"):
-            st.image(data["poster_url"], use_container_width=True)
+            try:
+               st.image(data["poster_url"], use_container_width=True)
+            except Exception:
+                st.write("🖼️ Poster unavailable")
+            
         else:
             st.write("🖼️ No poster")
         st.markdown("</div>", unsafe_allow_html=True)
