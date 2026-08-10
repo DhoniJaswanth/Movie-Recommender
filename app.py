@@ -347,9 +347,9 @@ elif st.session_state.view == "details":
     if data.get("backdrop_url"):
         st.markdown("#### Backdrop")
         try:
-        st.image(data["backdrop_url"], use_container_width=True)
+            st.image(data["backdrop_url"], use_container_width=True)
         except Exception:
-        st.write("🖼️ Backdrop unavailable")
+            st.write("🖼️ Backdrop unavailable")
 
     st.divider()
     st.markdown("### ✅ Recommendations")
