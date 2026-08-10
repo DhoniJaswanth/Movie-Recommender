@@ -95,7 +95,10 @@ def poster_grid(cards, cols=6, key_prefix="grid"):
 
             tmdb_id = m.get("tmdb_id")
             title = m.get("title", "Untitled")
-            poster = m.get("poster_url")
+            poster = m.get("poster_url") or m.get("poster_path")
+
+            if poster and poster.startswith("/"):
+                poster = f"https://image.tmdb.org/t/p/w500{poster}"
 
             with colset[c]:
                 if poster and isinstance(poster, str):
