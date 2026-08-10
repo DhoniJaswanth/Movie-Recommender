@@ -98,9 +98,11 @@ def poster_grid(cards, cols=6, key_prefix="grid"):
             poster = m.get("poster_url")
 
             with colset[c]:
-                if poster:
-                    st.image(poster,
-                            use_container_width=True)
+                if poster and isinstance(poster, str):
+     try:
+        st.image(poster, use_container_width=True)
+    except Exception:
+        st.write("🖼️ Poster unavailable")
                 else:
                     st.write("🖼️ No poster")
 
