@@ -99,7 +99,7 @@ def poster_grid(cards, cols=6, key_prefix="grid"):
 
             with colset[c]:
                 if poster:
-                    st.image(data["poster_url")
+                    st.image(data["poster_url"])
                 else:
                     st.write("🖼️ No poster")
 
