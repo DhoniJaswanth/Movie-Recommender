@@ -104,7 +104,7 @@ def poster_grid(cards, cols=6, key_prefix="grid"):
                     except Exception:
                         st.write("🖼️ Poster unavailable")
                  else:
-                    st.write("🖼️ No poster")
+                     st.write("🖼️ No poster")
 
                 if st.button("Open", key=f"{key_prefix}_{r}_{c}_{idx}_{tmdb_id}"):
                     if tmdb_id:
