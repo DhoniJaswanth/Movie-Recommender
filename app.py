@@ -104,7 +104,7 @@ def poster_grid(cards, cols=6, key_prefix="grid"):
                 if poster and isinstance(poster, str):
                      if not poster.startswith("http"):
                          poster = f"https://image.tmdb.org/t/p/w500{poster}"    
-                     st.image(poster, use_container_width=True)
+                     st.image(poster, use_container_width=200)
                 else:
                      st.write("🖼️ No poster")
 
