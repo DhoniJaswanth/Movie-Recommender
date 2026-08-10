@@ -102,10 +102,7 @@ def poster_grid(cards, cols=6, key_prefix="grid"):
 
             with colset[c]:
                 if poster and isinstance(poster, str):
-                    try:
-                        st.image(poster, use_container_width=True)
-                    except Exception:
-                        st.write("🖼️ Poster unavailable")
+                    st.image(poster, use_container_width=True)
                 else:
                      st.write("🖼️ No poster")
 
