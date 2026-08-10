@@ -9,8 +9,8 @@ scikit-learn==1.5.1
 
 
 streamlit==1.36.0
+gunicorn
 pillow
-
 
 
 
