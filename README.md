@@ -14,12 +14,6 @@ The application allows users to search for movies, view detailed information, an
 
 > Live Demo:https://movie-recommender-appc4fx53zc3wb5wfxpftgl.streamlit.app/
 
-```text
-Frontend: https://your-streamlit-app.streamlit.app
-Backend: https://your-fastapi-app.onrender.com
-```
-
-
 
 ## ✨ Features
 
