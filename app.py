@@ -13,9 +13,15 @@ st.set_page_config(page_title="Movie Recommender", page_icon="🎬", layout="wid
 # STYLES (minimal modern)
 
 st.markdown(
+    st.markdown("""
+<style>
+body {
+    background-color: #111111;
+}
+</style>
+""", unsafe_allow_html=True)
     
-    unsafe_allow_html=True,
-)
+    
 
 
 # STATE + ROUTING (single-file pages)
