@@ -9,24 +9,24 @@ TMDB_IMG = "https://image.tmdb.org/t/p/w500"
 
 st.set_page_config(page_title="Movie Recommender", page_icon="🎬", layout="wide")
 
-
+# =============================
 # STYLES (minimal modern)
-
+# =============================
 st.markdown(
-    st.markdown("""
+    """
 <style>
-body {
-    background-color: #111111;
-}
+.block-container { padding-top: 1rem; padding-bottom: 2rem; max-width: 1400px; }
+.small-muted { color:#6b7280; font-size: 0.92rem; }
+.movie-title { font-size: 0.9rem; line-height: 1.15rem; height: 2.3rem; overflow: hidden; }
+.card { border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; padding: 14px; background: rgba(255,255,255,0.7); }
 </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
 )
-    
-    
 
-
+# =============================
 # STATE + ROUTING (single-file pages)
-
+# =============================
 if "view" not in st.session_state:
     st.session_state.view = "home"  # home | details
 if "selected_tmdb_id" not in st.session_state:
@@ -60,9 +60,9 @@ def goto_details(tmdb_id: int):
     st.rerun()
 
 
-
+# =============================
 # API HELPERS
-
+# =============================
 @st.cache_data(ttl=30)  # short cache for autocomplete
 def api_get_json(path: str, params: dict | None = None):
     try:
@@ -123,14 +123,18 @@ def to_cards_from_tfidf_items(tfidf_items):
     return cards
 
 
-
+# =============================
 # IMPORTANT: Robust TMDB search parsing
 # Supports BOTH API shapes:
 # 1) raw TMDB: {"results":[{id,title,poster_path,...}]}
 # 2) list cards: [{tmdb_id,title,poster_url,...}]
-
+# =============================
 def parse_tmdb_search_to_cards(data, keyword: str, limit: int = 24):
-    
+    """
+    Returns:
+      suggestions: list[(label, tmdb_id)]
+      cards: list[{tmdb_id,title,poster_url}]
+    """
     keyword_l = keyword.strip().lower()
 
     # A) If API returns dict with 'results'
@@ -194,9 +198,9 @@ def parse_tmdb_search_to_cards(data, keyword: str, limit: int = 24):
     return suggestions, cards
 
 
-
+# =============================
 # SIDEBAR (clean)
-
+# =============================
 with st.sidebar:
     st.markdown("## 🎬 Menu")
     if st.button("🏠 Home"):
@@ -211,19 +215,19 @@ with st.sidebar:
     )
     grid_cols = st.slider("Grid columns", 4, 8, 6)
 
-
+# =============================
 # HEADER
-
+# =============================
 st.title("🎬 Movie Recommender")
 st.markdown(
-    
+    "<div class='small-muted'>Type keyword → dropdown suggestions + matching results → open → details + recommendations</div>",
     unsafe_allow_html=True,
 )
 st.divider()
 
-
+# ==========================================================
 # VIEW: HOME
-
+# ==========================================================
 if st.session_state.view == "home":
     typed = st.text_input(
         "Search by movie title (keyword)", placeholder="Type: avenger, batman, love..."
@@ -274,9 +278,9 @@ if st.session_state.view == "home":
 
     poster_grid(home_cards, cols=grid_cols, key_prefix="home_feed")
 
-
+# ==========================================================
 # VIEW: DETAILS
-
+# ==========================================================
 elif st.session_state.view == "details":
     tmdb_id = st.session_state.selected_tmdb_id
     if not tmdb_id:
@@ -368,4 +372,3 @@ elif st.session_state.view == "details":
                 st.warning("No recommendations available right now.")
     else:
         st.warning("No title available to compute recommendations.")
-
